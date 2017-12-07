@@ -1,3 +1,4 @@
+
 # Driver Collider - Background
 Current sixty-four-bit Windows operating systems require device drivers to be digitally-signed and to chain to a certificate authority registered on the system. While malware writers can in theory purchase their own code-signing certificate for a small fee and sign their own drivers, the use of their own certificate can be made a signature for use by anti-virus products to detect them. An existing infrastructure is already in place for blocking signed malware in the form of Certificate Revocation. Thus, malware writers have a significant incentive to rely on legitimately signed binaries where possible. Furthermore, using legitimate, digitally-signed drivers complicates detection, since the very same drivers are also used by legitimate products. This Bring Your Own Kernel Driver (BYOKD) technique was used in the Uroburos malware toolkit, which carried along a copy of the Virtual Box driver VBoxDrv.sys, digitally-signed by Oracle, and exploited this to gain kernel mode code execution [1]. Another example was the use of the EldoS RawDisk driver to securely wipe data in other malware attacks [2].
 
@@ -26,12 +27,13 @@ To uninstall, the system administrator can navigate to the Collision item in the
 
 ## References
 [1] https://www.mcafee.com/uk/security-awareness/articles/rise-of-rootkits.aspx
+
 [2] https://community.rsa.com/community/products/netwitness/blog/2017/02/08/recent-resurgence-in-shamoon
 
 
 ## License
-See [LICENSE] {LICENSE.md}
+See [LICENSE] (./LICENSE.md).
 
 
 ## Disclaimer
-See [DISCLAIMER] {DISCLAIMER.md}
+See [DISCLAIMER] (./DISCLAIMER.md).
