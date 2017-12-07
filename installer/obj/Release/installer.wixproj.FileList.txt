@@ -1,0 +1,6 @@
+obj\Release\Product.wixobj
+obj\Release\installer.wixproj.BindContentsFileListnull.txt
+obj\Release\installer.wixproj.BindOutputsFileListnull.txt
+obj\Release\installer.wixproj.BindBuiltOutputsFileListnull.txt
+C:\Users\user\documents\visual studio 2015\Projects\collision\installer\bin\Release\collisionSetup.msi
+C:\Users\user\documents\visual studio 2015\Projects\collision\installer\bin\Release\collisionSetup.wixpdb

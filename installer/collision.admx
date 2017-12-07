@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions">
+  <policyNamespaces>
+    <target prefix="devinst" namespace="Microsoft.Policies.IA" />
+    <using prefix="windows" namespace="Microsoft.Policies.Windows" />
+  </policyNamespaces>
+  <resources minRequiredRevision="1.0" />
+  <categories>
+    <category name="IA_Category" displayName="$(string.IA_Category)" explainText="$(string.IA_Help)">
+      <parentCategory ref="windows:System" />
+    </category>
+    <category name="CollisionConfiguration_Category" displayName="$(string.CollisionConfiguration_Category)" explainText="$(string.CollisionConfiguration_Help)">
+      <parentCategory ref="IA_Category" />
+    </category>
+  </categories>
+  <policies>
+	<policy name="Enforcement_Allow" class="Machine" displayName="$(string.CollisionEnforcement_Classes)" explainText="$(string.CollisionEnforcement_Classes_Help)" presentation="$(presentation.CollisionEnforcement_Classes)" key="Software\Policies\IA\CollisionConfiguration" valueName="Enforcement">
+      <parentCategory ref="CollisionConfiguration_Category" />
+      <supportedOn ref="windows:SUPPORTED_Windows7" />
+	  <enabledValue>
+        <decimal value="1" />
+      </enabledValue>
+      <disabledValue>
+        <decimal value="0" />
+      </disabledValue>
+      <elements>
+        <multiText id="CollisionEnforcement_Classes_Blacklist" valueName="Blacklist" />
+		<multiText id="CollisionEnforcement_Classes_Whitelist" valueName="Whitelist" />
+      </elements>
+    </policy>
+  </policies>
+</policyDefinitions>

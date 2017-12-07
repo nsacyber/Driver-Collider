@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:difx="http://schemas.microsoft.com/wix/DifxAppExtension">
+  <Product Id="67cf6cd8-9f68-4049-b5d1-f4b21a39c21e" Name="Collision" Language="1033" Version="1.3.0.0" Manufacturer="Department of Defense" UpgradeCode="b5ec4898-f7ce-4efa-818f-2145264c02d8">
+    <Package Id="*" Keywords="Collision" Description="Collision Installer" Comments="Installs Collision" Manufacturer="Department of Defense" InstallerVersion="100" Languages="1033" Compressed="yes" SummaryCodepage="1252" />
+    <Media Id="1" Cabinet="CollisionInstaller.cab" EmbedCab="yes" DiskPrompt="Collision Media" />
+    <Property Id="DiskPrompt" Value="Collision Install Media" />
+    <Property Id="REBOOT" Value="ReallySuppress" />
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="CollisionDir" Name="Collision">
+          <Directory Id="INSTALLDIR" Name="Install Files">
+            <Component Id="CollisionDriver" Guid="574267FE-8D39-4BC1-A3DE-EFDDE19E0BDB">
+              <File Id="CollisionSYS" Name="collision.sys" DiskId="1" Source="collision.sys" KeyPath="yes" />
+              <File Id="CollisionINF" Name="collision.inf" DiskId="1" Source="collision.inf" />
+              <File Id="CollisionCAT" Name="collision.cat" DiskId="1" Source="collision.cat" />
+              <File Id="CollisionADMX" Name="collision.admx" DiskId="1" Source="collision.admx" />
+              <File Id="CollisionADML" Name="collision.adml" DiskId="1" Source="collision.adml" />
+              <File Id="CollisionWL" Name="collision_list.txt" DiskId="1" Source="collision_list.txt" />
+              <File Id="CollisionREADME" Name="README.md" DiskId="1" Source="README.md" />
+              <File Id="CollisionLIC" Name="LICENSE.md" DiskId="1" Source="LICENSE.md" />
+              <File Id="CollisionDIS" Name="DISCLAIMER.md" DiskId="1" Source="DISCLAIMER.md" />
+              <File Id="CollisionMAN" Name="msg_file.man" DiskId="1" Source="msg_file.man" />
+              <RemoveRegistryKey Id="RegRemoval" Action="removeOnUninstall" Root="HKLM" Key="SOFTWARE\Policies\IA\CollisionConfiguration"/>
+              <difx:Driver DeleteFiles="yes" Legacy="yes" />
+            </Component>
+          </Directory>
+        </Directory>
+      </Directory>
+    </Directory>
+    <Feature Id="Complete" Level="1">
+      <ComponentRef Id="CollisionDriver" />
+    </Feature>
+    <CustomAction Id="GPOExtension" Script="vbscript">
+      <![CDATA[MsgBox("You MUST enable and set blacklist entries for the newly installed GP Extension at Computer Configuration->Policies->Administrative Templates->System->IA Configuration->Collision Tool Configuration and THEN restart the system for Collision to take effect. For systems having the extension set by a domain, also ensure the Group Policy on the system has been updated before restarting.")]]>
+    </CustomAction>
+    <CustomAction Id="ManifestInstall" Directory="INSTALLDIR" Execute="deferred" Impersonate="no" ExeCommand="[SystemFolder]wevtutil.exe im msg_file.man" Return="ignore" />
+    <CustomAction Id="ManifestUninstall" Directory="INSTALLDIR" Execute="deferred" Impersonate="no" ExeCommand="[SystemFolder]wevtutil.exe um msg_file.man" Return="ignore" />
+  <InstallExecuteSequence>
+    <Custom Action="GPOExtension" After="InstallFinalize">NOT Installed</Custom>
+    <Custom Action="ManifestInstall" Before="InstallFinalize">NOT Installed</Custom>
+    <Custom Action="ManifestUninstall" Before="RemoveFiles">Installed AND NOT UPGRADINGPRODUCTCODE</Custom>
+  </InstallExecuteSequence>
+  </Product>
+</Wix>

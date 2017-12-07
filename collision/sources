@@ -1,0 +1,3 @@
+TARGETNAME=collision
+TARGETTYPE=DRIVER
+SOURCES=driver.c  resource.rc

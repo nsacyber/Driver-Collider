@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<policyDefinitionResources xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" revision="1.0" schemaVersion="1.0" xmlns="http://schemas.microsoft.com/GroupPolicy/2006/07/PolicyDefinitions">
+  <displayName>enter display name here</displayName>
+  <description>enter description here</description>
+  <resources>
+    <stringTable>
+		<string id="IA_Category">IA Configuration</string>
+		<string id="IA_Help">Policy settings that control IA configuration.</string>
+		<string id="CollisionConfiguration_Category">Collision Tool Configuration</string>
+		<string id="CollisionConfiguration_Help">Policy settings that describe configuration of Collision tool to prevent known-good drivers commonly used for malicious intent from loading.</string>
+		<string id="CollisionEnforcement_Classes">Enforce Collision Tool Operation</string>
+		<string id="CollisionEnforcement_Classes_Help">This policy setting allows you to specify two lists; a blacklist of device names related to known-good drivers commonly used for malicious intent in order to prevent those drivers from loading, and a whitelist of all Microsoft driver device names in order to not block legitimate system resources.
+ 
+If you enable this policy setting, device names listed in the blacklist will be created on startup, preventing any driver that later on tries to create that same device to fail, unless a device name is also present in the whitelist.
+
+If you disable or do not configure this policy setting, the Collision tool will not create any device names and no drivers will be prevented from starting.</string>
+	</stringTable>
+	<presentationTable>
+      <presentation id="CollisionEnforcement_Classes">
+        <multiTextBox refId="CollisionEnforcement_Classes_Blacklist">Block loading of drivers that create these device names:</multiTextBox>
+        <text>To create a list of device names, click Show. In the Show Contents dialog box, in the Value column, type a device name</text>
+        <text>(for example, \Device\BadDeviceName).</text>
+		<multiTextBox refId="CollisionEnforcement_Classes_Whitelist">Prevent blocking of loading of legitimate Microsoft drivers that create these device names:</multiTextBox>
+        <text>To create a list of device names, click Show. In the Show Contents dialog box, in the Value column, type a device name</text>
+        <text>(for example, \Device\GoodDeviceName).</text>
+      </presentation>
+    </presentationTable>
+  </resources>
+</policyDefinitionResources>

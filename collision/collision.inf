@@ -1,0 +1,72 @@
+;
+; collision.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=System
+ClassGuid={4d36e97d-e325-11ce-bfc1-08002be10318}
+Provider=%ManufacturerName%
+DriverVer=
+DriverPackageType=KernelService
+CatalogFile=collision.cat
+
+[DestinationDirs]
+DefaultDestDir = %DriverDir%
+AdmxDir = 10,PolicyDefinitions
+AdmlDir = 10,PolicyDefinitions\en-US
+
+
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+collision.sys = 1
+collision.admx = 1
+collision.adml = 1
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[AdmxDir]
+collision.admx
+
+[AdmlDir]
+collision.adml
+
+[DriverDir]
+collision.sys
+
+[DefaultInstall]
+CopyFiles=DriverDir,AdmxDir,AdmlDir
+[DefaultInstall.Services]
+AddService=%ServiceName%,,Collision.Service
+
+[RegRmv]
+HKLM,SOFTWARE\Policies\IA\CollisionConfiguration
+
+[DefaultUninstall]
+DelFiles=DriverDir,AdmxDir,AdmlDir
+DelReg=RegRmv
+[DefaultUninstall.Services]
+DelService=%ServiceName%,0x200
+
+; -------------- collision driver install sections
+[Collision.Service]
+DisplayName    = %Collision.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 2               ; SERVICE_AUTO_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\collision.sys
+
+[Standard.NT$ARCH$]
+
+[Strings]
+ManufacturerName="Department of Defense"
+ClassName=""
+DiskName="collision Source Disk"
+ServiceName="Collision"
+Collision.SVCDESC = "Collision Service"
+DriverDir = 12
+RegPath = "SOFTWARE\Policies\IA\CollisionConfiguration"
