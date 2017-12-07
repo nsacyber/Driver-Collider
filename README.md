@@ -32,8 +32,8 @@ To uninstall, the system administrator can navigate to the Collision item in the
 
 
 ## License
-See [LICENSE] (./LICENSE.md).
+See [LICENSE](./LICENSE.md).
 
 
 ## Disclaimer
-See [DISCLAIMER] (./DISCLAIMER.md).
+See [DISCLAIMER](./DISCLAIMER.md).
