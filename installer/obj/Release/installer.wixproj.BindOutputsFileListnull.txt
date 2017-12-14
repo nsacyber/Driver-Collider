@@ -1,2 +1,0 @@
-C:\Users\user\documents\visual studio 2015\Projects\collision\installer\bin\Release\collisionSetup.msi
-C:\Users\user\documents\visual studio 2015\Projects\collision\installer\bin\Release\collisionSetup.wixpdb
